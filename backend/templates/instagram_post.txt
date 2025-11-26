@@ -1,0 +1,11 @@
+Fresh off the printer! {title}
+
+Designed by: {designer_name}
+Print Time: {print_duration}
+Material: {material} ({material_amount})
+
+{full_text}
+
+This amazing 3D print was created on my Bambu Lab P1S printer!
+
+#3dprintmarc #3dprinting #bambulab #p1s #3dprint #maker #3dprinted #makerworld #{material_lower} #3dprintingcommunity #additivemanufacturing #printedwithbambu

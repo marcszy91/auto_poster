@@ -1,0 +1,61 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CONTRIBUTING.md
+YOUTUBE_SETUP.md
+CHANGELOG.md
+
+# CI/CD
+.github
+.pre-commit-config.yaml
+.releaserc.json
+.commitlintrc.json
+
+# Node
+node_modules
+npm-debug.log*
+
+# Python
+__pycache__
+*.py[cod]
+.pytest_cache
+.mypy_cache
+.coverage
+htmlcov
+
+# Environment
+.env
+.env.local
+.env.example
+
+# IDE
+.vscode
+.idea
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist
+build
+*.egg-info
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# Uploads and temp (should be volumes)
+backend/uploads
+backend/temp
+uploads
+temp

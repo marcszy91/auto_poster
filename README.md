@@ -1,4 +1,4 @@
-# Auto Poster
+# Auto Poster test
 
 Automated social media management tool for 3D printing content. Upload your prints, add optional AI-generated descriptions, and post to multiple platforms with custom templates and background music.
 

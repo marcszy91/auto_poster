@@ -112,10 +112,19 @@ export const HomePage: React.FC = () => {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">Auto Poster</h1>
-          <p className="mt-2 text-sm text-gray-600">
-            Automated social media posting for your 3D prints
-          </p>
+          <div className="flex items-center gap-3">
+            <img
+              src="/auto-poster.svg"
+              alt="Auto Poster Logo"
+              className="h-10 w-10"
+            />
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Auto Poster</h1>
+              <p className="mt-1 text-sm text-gray-600">
+                Automated social media posting for your 3D prints
+              </p>
+            </div>
+          </div>
         </div>
       </header>
 

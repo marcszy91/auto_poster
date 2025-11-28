@@ -53,7 +53,7 @@ export default function RegisterPage() {
       await register(email, password);
       toast.success(
         "Registration successful! Please check your email to verify your account.",
-        { duration: 6000 },
+        { duration: 6000 }
       );
       navigate("/");
     } catch (error: any) {

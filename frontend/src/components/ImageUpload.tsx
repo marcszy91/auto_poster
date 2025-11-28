@@ -36,7 +36,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         onMainImageChange(file);
       }
     },
-    [onMainImageChange],
+    [onMainImageChange]
   );
 
   const onAdditionalDrop = useCallback(
@@ -57,7 +57,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
 
       Promise.all(previews).then(setAdditionalPreviews);
     },
-    [additionalImages, onAdditionalImagesChange],
+    [additionalImages, onAdditionalImagesChange]
   );
 
   const removeMainImage = () => {

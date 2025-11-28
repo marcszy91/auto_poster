@@ -38,7 +38,7 @@ export const HomePage: React.FC = () => {
       console.error("Error generating text:", error);
       toast.error(
         error.response?.data?.detail || "Textgenerierung fehlgeschlagen",
-        { id: loadingToast },
+        { id: loadingToast }
       );
     } finally {
       setIsGenerating(false);
@@ -82,7 +82,7 @@ export const HomePage: React.FC = () => {
         {
           id: loadingToast,
           duration: 5000,
-        },
+        }
       );
 
       // Reset form
@@ -99,7 +99,7 @@ export const HomePage: React.FC = () => {
       toast.error(
         error.response?.data?.detail ||
           "Failed to create post. Please try again.",
-        { id: loadingToast },
+        { id: loadingToast }
       );
     } finally {
       setIsSubmitting(false);

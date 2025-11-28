@@ -201,7 +201,7 @@ export const PostStatusDashboard: React.FC = () => {
                   {/* Instagram */}
                   <div
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg ${getStatusColor(
-                      post.instagram.status,
+                      post.instagram.status
                     )}`}
                   >
                     {getStatusIcon(post.instagram.status)}
@@ -216,7 +216,7 @@ export const PostStatusDashboard: React.FC = () => {
                   {/* YouTube */}
                   <div
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg ${getStatusColor(
-                      post.youtube.status,
+                      post.youtube.status
                     )}`}
                   >
                     {getStatusIcon(post.youtube.status)}

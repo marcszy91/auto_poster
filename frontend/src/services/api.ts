@@ -17,7 +17,7 @@ export const generateText = async (
   productTitle?: string,
   designerName?: string,
   printDuration?: string,
-  materials?: string,
+  materials?: string
 ): Promise<string> => {
   const formData = new FormData();
   formData.append("keywords", keywords);
@@ -33,7 +33,7 @@ export const generateText = async (
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    },
+    }
   );
   return response.data.generated_text;
 };
@@ -49,7 +49,7 @@ export const createPost = async (formData: FormData): Promise<Post> => {
 
 export const getPosts = async (
   page = 1,
-  pageSize = 20,
+  pageSize = 20
 ): Promise<PostListResponse> => {
   const response = await api.get<PostListResponse>("/posts", {
     params: { page, page_size: pageSize },
@@ -175,18 +175,18 @@ export const userApi = {
   // Get user credentials (masked)
   getCredentials: async (): Promise<UserCredentialsResponse> => {
     const response = await api.get<UserCredentialsResponse>(
-      "/users/me/credentials",
+      "/users/me/credentials"
     );
     return response.data;
   },
 
   // Update user credentials
   updateCredentials: async (
-    data: UserCredentials,
+    data: UserCredentials
   ): Promise<UserCredentialsResponse> => {
     const response = await api.put<UserCredentialsResponse>(
       "/users/me/credentials",
-      data,
+      data
     );
     return response.data;
   },

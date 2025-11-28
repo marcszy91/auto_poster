@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { userApi, type UserCredentials, type UserCredentialsResponse } from "../services/api";
+import {
+  userApi,
+  type UserCredentials,
+  type UserCredentialsResponse,
+} from "../services/api";
 import { useAuthStore } from "../store/authStore";
 
 export default function UserSettingsPage() {
@@ -10,7 +14,8 @@ export default function UserSettingsPage() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [credentials, setCredentials] = useState<UserCredentialsResponse | null>(null);
+  const [credentials, setCredentials] =
+    useState<UserCredentialsResponse | null>(null);
 
   // Form state
   const [instagramUsername, setInstagramUsername] = useState("");
@@ -59,8 +64,10 @@ export default function UserSettingsPage() {
       if (instagramUsername) updates.instagram_username = instagramUsername;
       if (instagramPassword) updates.instagram_password = instagramPassword;
       if (youtubeClientId) updates.youtube_client_id = youtubeClientId;
-      if (youtubeClientSecret) updates.youtube_client_secret = youtubeClientSecret;
-      if (youtubeRefreshToken) updates.youtube_refresh_token = youtubeRefreshToken;
+      if (youtubeClientSecret)
+        updates.youtube_client_secret = youtubeClientSecret;
+      if (youtubeRefreshToken)
+        updates.youtube_refresh_token = youtubeRefreshToken;
       if (groqApiKey) updates.groq_api_key = groqApiKey;
 
       await userApi.updateCredentials(updates);
@@ -151,7 +158,11 @@ export default function UserSettingsPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Email Verified:</span>
-              <span className={user?.is_verified ? "text-green-600" : "text-orange-600"}>
+              <span
+                className={
+                  user?.is_verified ? "text-green-600" : "text-orange-600"
+                }
+              >
                 {user?.is_verified ? "✓ Verified" : "⚠ Not Verified"}
               </span>
             </div>
@@ -251,7 +262,11 @@ export default function UserSettingsPage() {
                   type="password"
                   value={instagramPassword}
                   onChange={(e) => setInstagramPassword(e.target.value)}
-                  placeholder={credentials?.instagram_password_set ? "••••••••" : "Enter password"}
+                  placeholder={
+                    credentials?.instagram_password_set
+                      ? "••••••••"
+                      : "Enter password"
+                  }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
                 <p className="mt-1 text-xs text-gray-500">
@@ -293,7 +308,11 @@ export default function UserSettingsPage() {
                   type="password"
                   value={youtubeClientSecret}
                   onChange={(e) => setYoutubeClientSecret(e.target.value)}
-                  placeholder={credentials?.youtube_client_secret_set ? "••••••••" : "Enter client secret"}
+                  placeholder={
+                    credentials?.youtube_client_secret_set
+                      ? "••••••••"
+                      : "Enter client secret"
+                  }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
@@ -308,7 +327,11 @@ export default function UserSettingsPage() {
                   type="password"
                   value={youtubeRefreshToken}
                   onChange={(e) => setYoutubeRefreshToken(e.target.value)}
-                  placeholder={credentials?.youtube_refresh_token_set ? "••••••••" : "Enter refresh token"}
+                  placeholder={
+                    credentials?.youtube_refresh_token_set
+                      ? "••••••••"
+                      : "Enter refresh token"
+                  }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
@@ -331,7 +354,9 @@ export default function UserSettingsPage() {
                 type="password"
                 value={groqApiKey}
                 onChange={(e) => setGroqApiKey(e.target.value)}
-                placeholder={credentials?.groq_api_key_set ? "••••••••" : "Enter API key"}
+                placeholder={
+                  credentials?.groq_api_key_set ? "••••••••" : "Enter API key"
+                }
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
               <p className="mt-1 text-xs text-gray-500">

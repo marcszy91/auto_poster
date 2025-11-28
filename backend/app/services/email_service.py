@@ -96,7 +96,9 @@ class EmailService:
         """
         # In production, you would have a proper frontend URL
         # For now, we'll construct a simple verification link
-        verification_url = f"{settings.backend_url}/api/auth/verify-email?token={verification_token}"
+        verification_url = (
+            f"{settings.backend_url}/api/auth/verify-email?token={verification_token}"
+        )
 
         subject = "Verify your Auto Poster account"
 

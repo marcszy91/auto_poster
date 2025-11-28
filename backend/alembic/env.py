@@ -8,15 +8,15 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
+from app.config import settings
 
 # Import your Base to get access to metadata
 from app.database import Base
-from app.config import settings
 
 # Import all models so Alembic can detect them
 from app.models.app_settings import AppSettings  # noqa: F401
-from app.models.user import User  # noqa: F401
 from app.models.post import Post  # noqa: F401
+from app.models.user import User  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

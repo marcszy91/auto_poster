@@ -89,7 +89,6 @@ async def process_platform_posts(
     # Get user credentials
     instagram_creds = UserService.get_decrypted_instagram_credentials(user)
     youtube_creds = UserService.get_decrypted_youtube_credentials(user)
-    groq_api_key = UserService.get_decrypted_groq_api_key(user)
 
     # Initialize services with user credentials
     video_service = VideoService(temp_dir=settings.temp_dir)
@@ -98,8 +97,7 @@ async def process_platform_posts(
     instagram_service = None
     if instagram_creds:
         instagram_service = InstagramService(
-            username=instagram_creds[0],
-            password=instagram_creds[1]
+            username=instagram_creds[0], password=instagram_creds[1]
         )
 
     youtube_service = None
@@ -138,13 +136,13 @@ async def process_platform_posts(
                 await db.commit()
 
                 post_id_ig, post_url = await instagram_service.post_content(
-                image_path=main_image_path,
-                caption=caption,
-                video_path=video_path,
-                post_feed=post_instagram_feed,
-                post_reel=post_instagram_reel,
-                post_story=post_instagram_story,
-            )
+                    image_path=main_image_path,
+                    caption=caption,
+                    video_path=video_path,
+                    post_feed=post_instagram_feed,
+                    post_reel=post_instagram_reel,
+                    post_story=post_instagram_story,
+                )
 
                 post.instagram_status = PlatformStatus.SUCCESS
                 post.instagram_post_id = post_id_ig
@@ -178,10 +176,10 @@ async def process_platform_posts(
                     await db.commit()
 
                     video_id, video_url = await youtube_service.upload_content(
-                    video_path=video_path,
-                    title=title,
-                    description=caption,
-                )
+                        video_path=video_path,
+                        title=title,
+                        description=caption,
+                    )
 
                     post.youtube_status = PlatformStatus.SUCCESS
                     post.youtube_video_id = video_id
@@ -413,9 +411,7 @@ async def get_posts(
         PostListResponse: List of posts with pagination info
     """
     # Get total count for current user
-    count_result = await db.execute(
-        select(Post).where(Post.user_id == current_user.id)
-    )
+    count_result = await db.execute(select(Post).where(Post.user_id == current_user.id))
     total = len(count_result.scalars().all())
 
     # Get paginated posts for current user
@@ -464,8 +460,7 @@ async def get_post(
 
     if not post:
         raise HTTPException(
-            status_code=404,
-            detail="Post not found or you don't have permission to access it"
+            status_code=404, detail="Post not found or you don't have permission to access it"
         )
 
     return PostResponse.from_orm_model(post)

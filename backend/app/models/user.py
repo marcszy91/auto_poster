@@ -26,9 +26,7 @@ class User(Base):
 
     # Email Verification
     verification_token: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    verification_token_expires: Mapped[Optional[datetime]] = mapped_column(
-        DateTime, nullable=True
-    )
+    verification_token_expires: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
 
     # User Credentials (Encrypted in Application Layer)
     # These will be encrypted before saving and decrypted when reading
@@ -40,9 +38,7 @@ class User(Base):
     groq_api_key: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     # Timestamps
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.utcnow, nullable=False
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )

@@ -73,9 +73,7 @@ class AuthService:
         return new_user
 
     @staticmethod
-    async def authenticate_user(
-        db: AsyncSession, email: str, password: str
-    ) -> Optional[User]:
+    async def authenticate_user(db: AsyncSession, email: str, password: str) -> Optional[User]:
         """
         Authenticate a user with email and password.
 
@@ -168,9 +166,7 @@ class AuthService:
             True if verification successful, False otherwise
         """
         # Find user with this verification token
-        result = await db.execute(
-            select(User).where(User.verification_token == token)
-        )
+        result = await db.execute(select(User).where(User.verification_token == token))
         user = result.scalar_one_or_none()
 
         if not user:
@@ -178,10 +174,7 @@ class AuthService:
             return False
 
         # Check if token is expired
-        if (
-            user.verification_token_expires
-            and user.verification_token_expires < datetime.utcnow()
-        ):
+        if user.verification_token_expires and user.verification_token_expires < datetime.utcnow():
             logger.warning(f"Email verification attempted with expired token for: {user.email}")
             return False
 

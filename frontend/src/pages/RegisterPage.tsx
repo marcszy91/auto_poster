@@ -73,9 +73,15 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="flex flex-col items-center gap-3">
           <div className="flex items-center gap-3 px-4 py-3 rounded-full bg-indigo-50 border border-indigo-100 shadow-sm">
-            <img src="/auto-poster.svg" alt="Auto Poster" className="h-10 w-10" />
+            <img
+              src="/auto-poster.svg"
+              alt="Auto Poster"
+              className="h-10 w-10"
+            />
             <div className="text-left leading-tight">
-              <p className="text-sm font-semibold text-indigo-700">Auto Poster</p>
+              <p className="text-sm font-semibold text-indigo-700">
+                Auto Poster
+              </p>
               <p className="text-xs text-gray-500">Automate & schedule posts</p>
             </div>
           </div>
@@ -83,9 +89,7 @@ export default function RegisterPage() {
 
         {/* Header */}
         <div className="text-center mt-2">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Create account
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-900">Create account</h2>
           <p className="mt-2 text-sm text-gray-600">
             Sign up to get started with Auto Poster
           </p>

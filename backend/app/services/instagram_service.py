@@ -26,11 +26,11 @@ class InstagramService:
         Initialize Instagram service.
 
         Args:
-            username: Instagram username (defaults to settings)
-            password: Instagram password (defaults to settings)
+            username: Instagram username (required)
+            password: Instagram password (required)
         """
-        self.username = username or settings.instagram_username
-        self.password = password or settings.instagram_password
+        self.username = username
+        self.password = password
         self.client: Optional[Client] = None
 
     def login(self) -> None:

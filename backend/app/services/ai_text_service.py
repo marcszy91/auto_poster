@@ -16,9 +16,14 @@ class AITextServiceError(Exception):
 class AITextService:
     """Service for generating text using Groq AI API."""
 
-    def __init__(self):
-        """Initialize AI text service."""
-        self.api_key = settings.groq_api_key
+    def __init__(self, api_key: Optional[str] = None):
+        """
+        Initialize AI text service.
+
+        Args:
+            api_key: Groq API key (required)
+        """
+        self.api_key = api_key
         self.api_url = "https://api.groq.com/openai/v1/chat/completions"
         self.model = "llama-3.3-70b-versatile"  # Updated: Fast and high-quality model
 

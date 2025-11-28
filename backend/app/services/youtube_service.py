@@ -30,13 +30,13 @@ class YouTubeService:
         Initialize YouTube service.
 
         Args:
-            client_id: YouTube API client ID (defaults to settings)
-            client_secret: YouTube API client secret (defaults to settings)
-            refresh_token: YouTube API refresh token (defaults to settings)
+            client_id: YouTube API client ID (required)
+            client_secret: YouTube API client secret (required)
+            refresh_token: YouTube API refresh token (required)
         """
-        self.client_id = client_id or settings.youtube_client_id
-        self.client_secret = client_secret or settings.youtube_client_secret
-        self.refresh_token = refresh_token or settings.youtube_refresh_token
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.refresh_token = refresh_token
         self.youtube = None
 
     def authenticate(self) -> None:

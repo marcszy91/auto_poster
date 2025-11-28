@@ -4,8 +4,6 @@ from typing import Optional
 
 import httpx
 
-from app.config import settings
-
 
 class AITextServiceError(Exception):
     """Custom exception for AI text service errors."""

@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import {
-  userApi,
-  type UserCredentials,
-  type UserCredentialsResponse,
-} from "../services/api";
-import { useAuthStore } from "../store/authStore";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { userApi, type UserCredentials, type UserCredentialsResponse } from '../services/api';
+import { useAuthStore } from '../store/authStore';
 
 export default function UserSettingsPage() {
   const navigate = useNavigate();
@@ -14,22 +10,21 @@ export default function UserSettingsPage() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [credentials, setCredentials] =
-    useState<UserCredentialsResponse | null>(null);
+  const [credentials, setCredentials] = useState<UserCredentialsResponse | null>(null);
 
   // Form state
-  const [instagramUsername, setInstagramUsername] = useState("");
-  const [instagramPassword, setInstagramPassword] = useState("");
-  const [youtubeClientId, setYoutubeClientId] = useState("");
-  const [youtubeClientSecret, setYoutubeClientSecret] = useState("");
-  const [youtubeRefreshToken, setYoutubeRefreshToken] = useState("");
-  const [groqApiKey, setGroqApiKey] = useState("");
+  const [instagramUsername, setInstagramUsername] = useState('');
+  const [instagramPassword, setInstagramPassword] = useState('');
+  const [youtubeClientId, setYoutubeClientId] = useState('');
+  const [youtubeClientSecret, setYoutubeClientSecret] = useState('');
+  const [youtubeRefreshToken, setYoutubeRefreshToken] = useState('');
+  const [groqApiKey, setGroqApiKey] = useState('');
 
   // Password change state
   const [showPasswordChange, setShowPasswordChange] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   useEffect(() => {
     loadCredentials();
@@ -46,8 +41,8 @@ export default function UserSettingsPage() {
         setInstagramUsername(data.instagram_username);
       }
     } catch (error) {
-      console.error("Failed to load credentials:", error);
-      toast.error("Failed to load settings");
+      console.error('Failed to load credentials:', error);
+      toast.error('Failed to load settings');
     } finally {
       setIsLoading(false);
     }
@@ -64,26 +59,24 @@ export default function UserSettingsPage() {
       if (instagramUsername) updates.instagram_username = instagramUsername;
       if (instagramPassword) updates.instagram_password = instagramPassword;
       if (youtubeClientId) updates.youtube_client_id = youtubeClientId;
-      if (youtubeClientSecret)
-        updates.youtube_client_secret = youtubeClientSecret;
-      if (youtubeRefreshToken)
-        updates.youtube_refresh_token = youtubeRefreshToken;
+      if (youtubeClientSecret) updates.youtube_client_secret = youtubeClientSecret;
+      if (youtubeRefreshToken) updates.youtube_refresh_token = youtubeRefreshToken;
       if (groqApiKey) updates.groq_api_key = groqApiKey;
 
       await userApi.updateCredentials(updates);
-      toast.success("Credentials saved successfully!");
+      toast.success('Credentials saved successfully!');
 
       // Clear password fields
-      setInstagramPassword("");
-      setYoutubeClientSecret("");
-      setYoutubeRefreshToken("");
-      setGroqApiKey("");
+      setInstagramPassword('');
+      setYoutubeClientSecret('');
+      setYoutubeRefreshToken('');
+      setGroqApiKey('');
 
       // Reload to show updated status
       await loadCredentials();
     } catch (error: any) {
-      console.error("Save error:", error);
-      toast.error(error.response?.data?.detail || "Failed to save credentials");
+      console.error('Save error:', error);
+      toast.error(error.response?.data?.detail || 'Failed to save credentials');
     } finally {
       setIsSaving(false);
     }
@@ -93,12 +86,12 @@ export default function UserSettingsPage() {
     e.preventDefault();
 
     if (newPassword !== confirmNewPassword) {
-      toast.error("New passwords do not match");
+      toast.error('New passwords do not match');
       return;
     }
 
     if (newPassword.length < 8) {
-      toast.error("Password must be at least 8 characters");
+      toast.error('Password must be at least 8 characters');
       return;
     }
 
@@ -108,14 +101,14 @@ export default function UserSettingsPage() {
         new_password: newPassword,
       });
 
-      toast.success("Password changed successfully!");
+      toast.success('Password changed successfully!');
       setShowPasswordChange(false);
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmNewPassword("");
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmNewPassword('');
     } catch (error: any) {
-      console.error("Password change error:", error);
-      toast.error(error.response?.data?.detail || "Failed to change password");
+      console.error('Password change error:', error);
+      toast.error(error.response?.data?.detail || 'Failed to change password');
     }
   };
 
@@ -139,10 +132,7 @@ export default function UserSettingsPage() {
                 Manage your account and platform credentials
               </p>
             </div>
-            <button
-              onClick={() => navigate("/")}
-              className="text-gray-600 hover:text-gray-900"
-            >
+            <button onClick={() => navigate('/')} className="text-gray-600 hover:text-gray-900">
               ← Back to Home
             </button>
           </div>
@@ -158,12 +148,8 @@ export default function UserSettingsPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Email Verified:</span>
-              <span
-                className={
-                  user?.is_verified ? "text-green-600" : "text-orange-600"
-                }
-              >
-                {user?.is_verified ? "✓ Verified" : "⚠ Not Verified"}
+              <span className={user?.is_verified ? 'text-green-600' : 'text-orange-600'}>
+                {user?.is_verified ? '✓ Verified' : '⚠ Not Verified'}
               </span>
             </div>
             {!user?.is_verified && (
@@ -179,7 +165,7 @@ export default function UserSettingsPage() {
               onClick={() => setShowPasswordChange(!showPasswordChange)}
               className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
             >
-              {showPasswordChange ? "Cancel" : "Change Password"}
+              {showPasswordChange ? 'Cancel' : 'Change Password'}
             </button>
 
             {showPasswordChange && (
@@ -197,9 +183,7 @@ export default function UserSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    New Password
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">New Password</label>
                   <input
                     type="password"
                     value={newPassword}
@@ -235,14 +219,10 @@ export default function UserSettingsPage() {
         <form onSubmit={handleSaveCredentials}>
           {/* Instagram */}
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              Instagram Credentials
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Instagram Credentials</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Username
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Username</label>
                 <input
                   type="text"
                   value={instagramUsername}
@@ -262,25 +242,17 @@ export default function UserSettingsPage() {
                   type="password"
                   value={instagramPassword}
                   onChange={(e) => setInstagramPassword(e.target.value)}
-                  placeholder={
-                    credentials?.instagram_password_set
-                      ? "••••••••"
-                      : "Enter password"
-                  }
+                  placeholder={credentials?.instagram_password_set ? '••••••••' : 'Enter password'}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
-                <p className="mt-1 text-xs text-gray-500">
-                  Leave empty to keep current password
-                </p>
+                <p className="mt-1 text-xs text-gray-500">Leave empty to keep current password</p>
               </div>
             </div>
           </div>
 
           {/* YouTube */}
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              YouTube Credentials
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">YouTube Credentials</h2>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -309,9 +281,7 @@ export default function UserSettingsPage() {
                   value={youtubeClientSecret}
                   onChange={(e) => setYoutubeClientSecret(e.target.value)}
                   placeholder={
-                    credentials?.youtube_client_secret_set
-                      ? "••••••••"
-                      : "Enter client secret"
+                    credentials?.youtube_client_secret_set ? '••••••••' : 'Enter client secret'
                   }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
@@ -328,9 +298,7 @@ export default function UserSettingsPage() {
                   value={youtubeRefreshToken}
                   onChange={(e) => setYoutubeRefreshToken(e.target.value)}
                   placeholder={
-                    credentials?.youtube_refresh_token_set
-                      ? "••••••••"
-                      : "Enter refresh token"
+                    credentials?.youtube_refresh_token_set ? '••••••••' : 'Enter refresh token'
                   }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
@@ -340,9 +308,7 @@ export default function UserSettingsPage() {
 
           {/* Groq */}
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              Groq API Key
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Groq API Key</h2>
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 API Key
@@ -354,14 +320,10 @@ export default function UserSettingsPage() {
                 type="password"
                 value={groqApiKey}
                 onChange={(e) => setGroqApiKey(e.target.value)}
-                placeholder={
-                  credentials?.groq_api_key_set ? "••••••••" : "Enter API key"
-                }
+                placeholder={credentials?.groq_api_key_set ? '••••••••' : 'Enter API key'}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
-              <p className="mt-1 text-xs text-gray-500">
-                Used for AI text generation
-              </p>
+              <p className="mt-1 text-xs text-gray-500">Used for AI text generation</p>
             </div>
           </div>
 
@@ -372,7 +334,7 @@ export default function UserSettingsPage() {
               disabled={isSaving}
               className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isSaving ? "Saving..." : "Save Credentials"}
+              {isSaving ? 'Saving...' : 'Save Credentials'}
             </button>
           </div>
         </form>

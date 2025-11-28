@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { getPosts } from "../services/api";
-import type { Post } from "../types/post";
+import React, { useEffect, useState } from 'react';
+import { getPosts } from '../services/api';
+import type { Post } from '../types/post';
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case "success":
-      return "bg-green-100 text-green-800";
-    case "failed":
-      return "bg-red-100 text-red-800";
-    case "processing":
-      return "bg-yellow-100 text-yellow-800";
-    case "pending":
-      return "bg-gray-100 text-gray-800";
-    case "skipped":
-      return "bg-blue-100 text-blue-800";
+    case 'success':
+      return 'bg-green-100 text-green-800';
+    case 'failed':
+      return 'bg-red-100 text-red-800';
+    case 'processing':
+      return 'bg-yellow-100 text-yellow-800';
+    case 'pending':
+      return 'bg-gray-100 text-gray-800';
+    case 'skipped':
+      return 'bg-blue-100 text-blue-800';
     default:
-      return "bg-gray-100 text-gray-800";
+      return 'bg-gray-100 text-gray-800';
   }
 };
 
 const getStatusIcon = (status: string) => {
   switch (status) {
-    case "success":
+    case 'success':
       return (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
@@ -31,7 +31,7 @@ const getStatusIcon = (status: string) => {
           />
         </svg>
       );
-    case "failed":
+    case 'failed':
       return (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
@@ -41,7 +41,7 @@ const getStatusIcon = (status: string) => {
           />
         </svg>
       );
-    case "processing":
+    case 'processing':
       return (
         <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
           <circle
@@ -83,7 +83,7 @@ export const PostStatusDashboard: React.FC = () => {
       setPosts(response.posts);
       setError(null);
     } catch (err) {
-      setError("Failed to fetch posts");
+      setError('Failed to fetch posts');
       console.error(err);
     } finally {
       setLoading(false);
@@ -113,9 +113,7 @@ export const PostStatusDashboard: React.FC = () => {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
-        {error}
-      </div>
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">{error}</div>
     );
   }
 
@@ -150,12 +148,12 @@ export const PostStatusDashboard: React.FC = () => {
               <div className="flex-shrink-0">
                 <img
                   src={`/${post.main_image_path}`}
-                  alt={post.title || "Post image"}
+                  alt={post.title || 'Post image'}
                   className="w-32 h-32 object-cover rounded-lg"
                   onError={(e) => {
                     // Fallback to icon if image fails to load
                     const target = e.currentTarget;
-                    target.style.display = "none";
+                    target.style.display = 'none';
                     const parent = target.parentElement;
                     if (parent) {
                       parent.innerHTML = `
@@ -173,10 +171,10 @@ export const PostStatusDashboard: React.FC = () => {
               {/* Content */}
               <div className="flex-grow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {post.title || "Untitled"}
+                  {post.title || 'Untitled'}
                 </h3>
                 <p className="text-sm text-gray-600 mb-3">
-                  Designer: {post.designer_name || "Unknown"}
+                  Designer: {post.designer_name || 'Unknown'}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.print_duration && (
@@ -207,9 +205,7 @@ export const PostStatusDashboard: React.FC = () => {
                     {getStatusIcon(post.instagram.status)}
                     <div className="flex-grow">
                       <div className="font-medium text-sm">Instagram</div>
-                      <div className="text-xs capitalize">
-                        {post.instagram.status}
-                      </div>
+                      <div className="text-xs capitalize">{post.instagram.status}</div>
                     </div>
                   </div>
 
@@ -222,9 +218,7 @@ export const PostStatusDashboard: React.FC = () => {
                     {getStatusIcon(post.youtube.status)}
                     <div className="flex-grow">
                       <div className="font-medium text-sm">YouTube</div>
-                      <div className="text-xs capitalize">
-                        {post.youtube.status}
-                      </div>
+                      <div className="text-xs capitalize">{post.youtube.status}</div>
                     </div>
                   </div>
                 </div>
@@ -233,14 +227,10 @@ export const PostStatusDashboard: React.FC = () => {
                 {(post.instagram.error || post.youtube.error) && (
                   <div className="mt-3 space-y-1">
                     {post.instagram.error && (
-                      <p className="text-xs text-red-600">
-                        Instagram: {post.instagram.error}
-                      </p>
+                      <p className="text-xs text-red-600">Instagram: {post.instagram.error}</p>
                     )}
                     {post.youtube.error && (
-                      <p className="text-xs text-red-600">
-                        YouTube: {post.youtube.error}
-                      </p>
+                      <p className="text-xs text-red-600">YouTube: {post.youtube.error}</p>
                     )}
                   </div>
                 )}

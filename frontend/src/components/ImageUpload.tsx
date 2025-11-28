@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 interface ImageUploadProps {
   onMainImageChange: (file: File | null) => void;
@@ -74,7 +74,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
   const mainDropzone = useDropzone({
     onDrop: onMainDrop,
     accept: {
-      "image/*": [".png", ".jpg", ".jpeg", ".webp"],
+      'image/*': ['.png', '.jpg', '.jpeg', '.webp'],
     },
     maxFiles: 1,
     multiple: false,
@@ -83,7 +83,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
   const additionalDropzone = useDropzone({
     onDrop: onAdditionalDrop,
     accept: {
-      "image/*": [".png", ".jpg", ".jpeg", ".webp"],
+      'image/*': ['.png', '.jpg', '.jpeg', '.webp'],
     },
     multiple: true,
   });
@@ -100,8 +100,8 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
             {...mainDropzone.getRootProps()}
             className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
               mainDropzone.isDragActive
-                ? "border-primary-500 bg-primary-50"
-                : "border-gray-300 hover:border-primary-400"
+                ? 'border-primary-500 bg-primary-50'
+                : 'border-gray-300 hover:border-primary-400'
             }`}
           >
             <input {...mainDropzone.getInputProps()} />
@@ -121,14 +121,10 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
                 />
               </svg>
               <div className="text-sm text-gray-600">
-                <span className="text-primary-600 font-medium">
-                  Click to upload
-                </span>{" "}
-                or drag and drop
+                <span className="text-primary-600 font-medium">Click to upload</span> or drag and
+                drop
               </div>
-              <p className="text-xs text-gray-500">
-                PNG, JPG, JPEG or WEBP (Max 10MB)
-              </p>
+              <p className="text-xs text-gray-500">PNG, JPG, JPEG or WEBP (Max 10MB)</p>
             </div>
           </div>
         ) : (
@@ -143,12 +139,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
               onClick={removeMainImage}
               className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -170,16 +161,14 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           {...additionalDropzone.getRootProps()}
           className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
             additionalDropzone.isDragActive
-              ? "border-primary-500 bg-primary-50"
-              : "border-gray-300 hover:border-primary-400"
+              ? 'border-primary-500 bg-primary-50'
+              : 'border-gray-300 hover:border-primary-400'
           }`}
         >
           <input {...additionalDropzone.getInputProps()} />
           <p className="text-sm text-gray-600">
-            <span className="text-primary-600 font-medium">
-              Click to upload
-            </span>{" "}
-            or drag and drop additional images
+            <span className="text-primary-600 font-medium">Click to upload</span> or drag and drop
+            additional images
           </p>
         </div>
 
@@ -198,12 +187,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
                   onClick={() => removeAdditionalImage(index)}
                   className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

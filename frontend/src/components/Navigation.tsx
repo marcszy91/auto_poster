@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/authStore";
-import toast from "react-hot-toast";
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/authStore';
+import toast from 'react-hot-toast';
 
-const logoSrc = "/auto-poster.svg";
+const logoSrc = '/auto-poster.svg';
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -17,27 +17,27 @@ export default function Navigation() {
         setMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", onClickAway);
-    return () => document.removeEventListener("mousedown", onClickAway);
+    document.addEventListener('mousedown', onClickAway);
+    return () => document.removeEventListener('mousedown', onClickAway);
   }, []);
 
   const handleLogout = async () => {
     try {
       await logout();
-      toast.success("Logged out successfully");
-      navigate("/login");
+      toast.success('Logged out successfully');
+      navigate('/login');
     } catch (error) {
-      console.error("Logout error:", error);
-      toast.error("Logout failed");
+      console.error('Logout error:', error);
+      toast.error('Logout failed');
     }
   };
 
   const handleSettings = () => {
-    navigate("/settings");
+    navigate('/settings');
     setMenuOpen(false);
   };
 
-  const avatarInitial = user?.email?.[0]?.toUpperCase() || "?";
+  const avatarInitial = user?.email?.[0]?.toUpperCase() || '?';
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">
@@ -47,12 +47,8 @@ export default function Navigation() {
           <div className="flex items-center gap-3">
             <img src={logoSrc} alt="Auto Poster logo" className="h-9 w-9" />
             <div className="leading-tight">
-              <div className="text-lg font-semibold text-gray-900">
-                Auto Poster
-              </div>
-              <div className="text-xs text-gray-500">
-                Automate & schedule content
-              </div>
+              <div className="text-lg font-semibold text-gray-900">Auto Poster</div>
+              <div className="text-xs text-gray-500">Automate & schedule content</div>
             </div>
           </div>
 
@@ -71,13 +67,9 @@ export default function Navigation() {
                   <div className="absolute right-0 mt-3 w-56 rounded-lg bg-white shadow-lg border border-gray-100 py-2 z-20">
                     <div className="px-4 py-2">
                       <p className="text-xs text-gray-500">Signed in as</p>
-                      <p className="text-sm font-medium text-gray-900 break-all">
-                        {user.email}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900 break-all">{user.email}</p>
                       {!user.is_verified && (
-                        <p className="mt-1 text-xs text-orange-600">
-                          Email not verified
-                        </p>
+                        <p className="mt-1 text-xs text-orange-600">Email not verified</p>
                       )}
                     </div>
                     <div className="border-t border-gray-100 my-2" />

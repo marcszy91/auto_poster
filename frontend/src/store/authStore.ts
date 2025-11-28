@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { authApi, type UserResponse } from "../services/api";
+import { create } from 'zustand';
+import { authApi, type UserResponse } from '../services/api';
 
 interface AuthState {
   user: UserResponse | null;
@@ -64,7 +64,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       await authApi.logout();
     } catch (error) {
-      console.error("Logout error:", error);
+      console.error('Logout error:', error);
     } finally {
       set({
         user: null,

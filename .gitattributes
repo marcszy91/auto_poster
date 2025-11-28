@@ -1,0 +1,3 @@
+# Normalize line endings and enforce LF for source files
+* text=auto
+*.{js,ts,tsx,jsx,json,css,md,html,yml,yaml} text eol=lf

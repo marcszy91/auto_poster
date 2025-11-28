@@ -45,6 +45,16 @@ class EmailService:
             message["To"] = to_email
             message["Subject"] = subject
 
+            # Prefer STARTTLS on port 587; only use implicit TLS for SMTPS (usually port 465)
+            use_tls = settings.smtp_use_tls
+            start_tls = settings.smtp_start_tls
+            if settings.smtp_port == 587 and use_tls:
+                logger.warning(
+                    "SMTP_USE_TLS=True with port 587 detected, switching to STARTTLS to avoid SSL errors"
+                )
+                use_tls = False
+                start_tls = True
+
             # Add text part if provided
             if text_content:
                 text_part = MIMEText(text_content, "plain")
@@ -61,7 +71,8 @@ class EmailService:
                 port=settings.smtp_port,
                 username=settings.smtp_username,
                 password=settings.smtp_password,
-                use_tls=settings.smtp_use_tls,
+                use_tls=use_tls,
+                start_tls=start_tls,
             )
 
             logger.info(f"Email sent successfully to {to_email}")
@@ -85,7 +96,7 @@ class EmailService:
         """
         # In production, you would have a proper frontend URL
         # For now, we'll construct a simple verification link
-        verification_url = f"http://localhost:8000/api/auth/verify-email?token={verification_token}"
+        verification_url = f"{settings.backend_url}/api/auth/verify-email?token={verification_token}"
 
         subject = "Verify your Auto Poster account"
 
@@ -166,7 +177,7 @@ class EmailService:
             True if email sent successfully, False otherwise
         """
         # This is a placeholder for future password reset functionality
-        reset_url = f"http://localhost:8000/api/auth/reset-password?token={reset_token}"
+        reset_url = f"{settings.backend_url}/api/auth/reset-password?token={reset_token}"
 
         subject = "Reset your Auto Poster password"
 

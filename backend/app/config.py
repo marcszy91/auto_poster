@@ -31,6 +31,10 @@ class Settings(BaseSettings):
     upload_dir: str = "./uploads"
     temp_dir: str = "./temp"
 
+    # Public URLs (used in email links/redirects; when running in Docker with bundled frontend, set both to the same URL)
+    backend_url: str = "http://localhost:8000"
+    frontend_url: str = "http://localhost:5173"
+
     # Video Generation Settings
     video_duration: int = 15  # Instagram Reels duration in seconds
     shorts_duration: int = 60  # YouTube Shorts duration in seconds
@@ -57,7 +61,9 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     smtp_from_email: str = ""
     smtp_from_name: str = "Auto Poster"
-    smtp_use_tls: bool = True
+    # STARTTLS is the default for port 587; set smtp_use_tls=True only for implicit TLS (port 465)
+    smtp_use_tls: bool = False
+    smtp_start_tls: bool = True
 
     # Logging Configuration
     log_level: str = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL

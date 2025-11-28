@@ -4,8 +4,10 @@ import logging
 from typing import Optional
 
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Response, status
+from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
 from app.database import get_db
 from app.dependencies import get_current_user
 from app.models.user import User
@@ -169,7 +171,7 @@ async def refresh_token(
 async def verify_email(
     token: str,
     db: AsyncSession = Depends(get_db),
-) -> dict:
+) -> Response:
     """
     Verify user email with verification token.
 
@@ -179,13 +181,14 @@ async def verify_email(
     """
     success = await AuthService.verify_email(db, token)
 
-    if not success:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid or expired verification token",
-        )
+    if success:
+        # Redirect to frontend login with success indicator
+        redirect_url = f"{settings.frontend_url}/login?verified=1"
+        return RedirectResponse(url=redirect_url, status_code=status.HTTP_303_SEE_OTHER)
 
-    return {"message": "Email verified successfully"}
+    # Invalid token -> redirect with error flag (fallback to JSON if misconfigured)
+    redirect_url = f"{settings.frontend_url}/login?verified=0"
+    return RedirectResponse(url=redirect_url, status_code=status.HTTP_303_SEE_OTHER)
 
 
 @router.post("/resend-verification")

@@ -26,19 +26,14 @@ class Settings(BaseSettings):
             return [origin.strip() for origin in v.split(",") if origin.strip()]
         return v
 
-    # Instagram Credentials
-    instagram_username: str = ""
-    instagram_password: str = ""
-
-    # YouTube API Credentials
-    youtube_client_id: str = ""
-    youtube_client_secret: str = ""
-    youtube_refresh_token: str = ""
-
     # File Upload Configuration
     max_upload_size: int = 10485760  # 10MB
     upload_dir: str = "./uploads"
     temp_dir: str = "./temp"
+
+    # Public URLs (used in email links/redirects; when running in Docker with bundled frontend, set both to the same URL)
+    backend_url: str = "http://localhost:8000"
+    frontend_url: str = "http://localhost:5173"
 
     # Video Generation Settings
     video_duration: int = 15  # Instagram Reels duration in seconds
@@ -49,8 +44,26 @@ class Settings(BaseSettings):
     scraper_timeout: int = 30
     headless_browser: bool = True
 
-    # Groq AI API
-    groq_api_key: str = ""
+    # Authentication & Security
+    jwt_secret_key: str = ""  # Loaded from database on startup (auto-generated)
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+    refresh_token_expire_days: int = 7
+
+    # Admin User Configuration (for initial setup)
+    admin_email: str = ""
+    admin_password: str = ""
+
+    # SMTP Email Configuration
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_username: str = ""
+    smtp_password: str = ""
+    smtp_from_email: str = ""
+    smtp_from_name: str = "Auto Poster"
+    # STARTTLS is the default for port 587; set smtp_use_tls=True only for implicit TLS (port 465)
+    smtp_use_tls: bool = False
+    smtp_start_tls: bool = True
 
     # Logging Configuration
     log_level: str = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL

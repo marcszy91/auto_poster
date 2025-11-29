@@ -176,17 +176,20 @@ volumes:
 Add these in Portainer's environment variables section:
 
 ```env
-INSTAGRAM_USERNAME=marcszy91
-INSTAGRAM_PASSWORD=your_password
-YOUTUBE_CLIENT_ID=your_client_id
-YOUTUBE_CLIENT_SECRET=your_client_secret
-YOUTUBE_REFRESH_TOKEN=your_token
-GROQ_API_KEY=your_groq_key
 DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/auto_poster
 DEBUG=false
-API_HOST=0.0.0.0
-API_PORT=8000
-CORS_ORIGINS=http://your-nas-ip
+BACKEND_URL=https://hostname:port
+FRONTEND_URL=https://hostname:port
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=your_email@gmail.com
+SMTP_PASSWORD=your_app_password
+SMTP_FROM_EMAIL=your_email@gmail.com
+SMTP_FROM_NAME=Auto Poster
+SMTP_USE_TLS=false
+SMTP_START_TLS=true
+LOG_LEVEL=INFO
+LOG_FORMAT=text
 ```
 
 ### 4. Deploy Stack
@@ -195,7 +198,7 @@ Click "Deploy the stack" and wait for containers to start.
 
 ### 5. Access Application
 
-Navigate to `http://your-nas-ip` in your browser.
+Navigate to `https://hostname:port` in your browser.
 
 ## Commit Message Format
 

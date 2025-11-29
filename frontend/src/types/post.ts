@@ -1,5 +1,5 @@
 export interface PlatformStatus {
-  status: "pending" | "processing" | "success" | "failed" | "skipped";
+  status: 'pending' | 'processing' | 'success' | 'failed' | 'skipped';
   post_id: string | null;
   error: string | null;
   posted_at: string | null;

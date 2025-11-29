@@ -38,17 +38,24 @@ Automated social media management tool for 3D printing content. Upload your prin
 # Database
 DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/auto_poster
 
-# Instagram (required)
-INSTAGRAM_USERNAME=your_username
-INSTAGRAM_PASSWORD=your_password
+# API / URLs (for email links & CORS)
+DEBUG=false
+BACKEND_URL=http://localhost:8000
+FRONTEND_URL=http://localhost:5173
 
-# YouTube (optional)
-YOUTUBE_CLIENT_ID=your_client_id.apps.googleusercontent.com
-YOUTUBE_CLIENT_SECRET=your_client_secret
-YOUTUBE_REFRESH_TOKEN=your_refresh_token
+# SMTP (required for verification emails)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=your_email@gmail.com
+SMTP_PASSWORD=your_app_password
+SMTP_FROM_EMAIL=your_email@gmail.com
+SMTP_FROM_NAME=Auto Poster
+SMTP_USE_TLS=false
+SMTP_START_TLS=true
 
-# Groq AI (optional)
-GROQ_API_KEY=your_groq_api_key
+# Logging
+LOG_LEVEL=INFO
+LOG_FORMAT=text
 ```
 
 3. Start services:
@@ -76,20 +83,23 @@ Quick summary:
 
 ### Environment Variables
 
-**Required:**
-- `INSTAGRAM_USERNAME` - Instagram account username
-- `INSTAGRAM_PASSWORD` - Instagram account password
-
-**Optional:**
-- `YOUTUBE_CLIENT_ID` - YouTube OAuth client ID
-- `YOUTUBE_CLIENT_SECRET` - YouTube OAuth client secret
-- `YOUTUBE_REFRESH_TOKEN` - YouTube OAuth refresh token
-- `GROQ_API_KEY` - Groq API key for AI text generation
-- `DATABASE_URL` - Database connection string (default: PostgreSQL)
-- `VIDEO_DURATION` - Video length in seconds (default: 15)
+**Core:**
+- `DATABASE_URL` - Database connection string (PostgreSQL recommended)
 - `DEBUG` - Debug mode (default: false)
-- `LOG_LEVEL` - Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL (default: INFO)
-- `LOG_FORMAT` - Log format: text or json (default: text, use json for Datadog/CloudWatch)
+- `BACKEND_URL` - Public backend URL (used in email links)
+- `FRONTEND_URL` - Public frontend URL (used for redirects; in Docker set same as backend)
+
+**SMTP (email verification):**
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`
+- `SMTP_FROM_EMAIL`, `SMTP_FROM_NAME`
+- `SMTP_USE_TLS` (implicit TLS, e.g., port 465), `SMTP_START_TLS` (STARTTLS, e.g., port 587)
+
+**Logging & Video:**
+- `LOG_LEVEL`, `LOG_FORMAT`
+- `VIDEO_DURATION`, `SHORTS_DURATION`
+
+**Where to put platform/API credentials now?**
+- Instagram, YouTube, Groq API key etc. are configured per user inside the app (Settings → Credentials). They are stored in the database, not in environment variables.
 
 ### Custom Templates
 
@@ -167,7 +177,8 @@ See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for details.
 1. Configure `.env` with production settings:
    - Set `DEBUG=false`
    - Use PostgreSQL for `DATABASE_URL`
-   - Set strong passwords
+   - Set `BACKEND_URL`/`FRONTEND_URL` to your public domain (identical when frontend is served by backend)
+   - Configure SMTP for email verification
    - Configure `CORS_ORIGINS` for your domain
 
 2. Deploy:
@@ -203,12 +214,17 @@ docker-compose up -d
          - "80:8000"
        environment:
          - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/auto_poster
-         - INSTAGRAM_USERNAME=${INSTAGRAM_USERNAME}
-         - INSTAGRAM_PASSWORD=${INSTAGRAM_PASSWORD}
-         - YOUTUBE_CLIENT_ID=${YOUTUBE_CLIENT_ID}
-         - YOUTUBE_CLIENT_SECRET=${YOUTUBE_CLIENT_SECRET}
-         - YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
-         - GROQ_API_KEY=${GROQ_API_KEY}
+         - DEBUG=false
+         - BACKEND_URL=http://your-domain-or-ip
+         - FRONTEND_URL=http://your-domain-or-ip
+         - SMTP_HOST=${SMTP_HOST}
+         - SMTP_PORT=${SMTP_PORT}
+         - SMTP_USERNAME=${SMTP_USERNAME}
+         - SMTP_PASSWORD=${SMTP_PASSWORD}
+         - SMTP_FROM_EMAIL=${SMTP_FROM_EMAIL}
+         - SMTP_FROM_NAME=${SMTP_FROM_NAME}
+         - SMTP_USE_TLS=${SMTP_USE_TLS}
+         - SMTP_START_TLS=${SMTP_START_TLS}
        volumes:
          - ./uploads:/app/uploads
          - ./temp:/app/temp

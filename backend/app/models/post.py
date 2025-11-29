@@ -4,8 +4,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy import JSON, DateTime, Integer, String, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
@@ -51,6 +51,12 @@ class Post(Base):
 
     # Primary key
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+
+    # User relationship
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    user: Mapped["User"] = relationship("User", back_populates="posts")  # noqa: F821
 
     # MakerWorld data
     makerworld_id: Mapped[str] = mapped_column(String(255), nullable=False, index=True)

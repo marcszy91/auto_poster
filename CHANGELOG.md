@@ -1,3 +1,19 @@
+## [1.1.0](https://github.com/marcszy91/auto_poster/compare/v1.0.0...v1.1.0) (2025-11-29)
+
+### ⚠ BREAKING CHANGES
+
+* instagram, youtube and groq tokens moved from env to user table
+
+### Features
+
+* add initial migration and some small fixes ([ed04de0](https://github.com/marcszy91/auto_poster/commit/ed04de00c4713ff630f7b666b97122b887c85b27))
+* implement userhandling in backend ([0cd5889](https://github.com/marcszy91/auto_poster/commit/0cd588901032458829f3574153e35c5b8cb0e008))
+* implement userhandling in frontend ([f2923da](https://github.com/marcszy91/auto_poster/commit/f2923da72f921aeb92ae7209b4b55218a7d1de32))
+
+### Bug Fixes
+
+* linting and styling ([959a325](https://github.com/marcszy91/auto_poster/commit/959a325f220833db3fc18d931b0bf94b3b79c264))
+
 ## [1.1.0-dev.1](https://github.com/marcszy91/auto_poster/compare/v1.0.0...v1.1.0-dev.1) (2025-11-29)
 
 ### ⚠ BREAKING CHANGES
